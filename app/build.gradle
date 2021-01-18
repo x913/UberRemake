@@ -44,15 +44,15 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
 
-    // Firebase BOM
-    //implementation platform('com.google.firebase:firebase-bom:26.3.0')
-    //implementation 'com.google.firebase:firebase-auth-ktx'
-
-//    implementation 'com.google.firebase:firebase-auth:19.3.1'
-//    implementation 'com.firebaseui:firebase-ui-auth:6.2.1'
-
+    // Firebase
     implementation platform('com.google.firebase:firebase-bom:26.3.0')
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.firebaseui:firebase-ui-auth:7.0.0'
+
+    // Material
+    implementation 'com.google.android.material:material:1.2.1'
+
+    // Firebase database
+    implementation 'com.google.firebase:firebase-database:19.6.0'
 
 }

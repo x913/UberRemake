@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">UberRemake</string>
+    <string name="register_text">Lets start with creating your account</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="phone_number">Your phone number</string>
 </resources>
