@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.renderscript.Sampler
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -21,6 +22,7 @@ import com.google.firebase.database.*
 import com.k3kc.uberremake.model.DriverInfoModel
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.activity_splash_screen.*
 import kotlinx.android.synthetic.main.layout_register.*
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -90,7 +92,6 @@ class SplashScreenActivity : AppCompatActivity() {
             val user = it.currentUser
             if(user != null)
                 checkUserFromFirebase()
-                //Toast.makeText(this@SplashScreenActivity, "Welcome: " + user.uid, Toast.LENGTH_SHORT).show()
             else {
                 showLoginLayout()
             }
@@ -100,7 +101,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun checkUserFromFirebase() {
         driverInfoRef
-            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)    // get the child element we want
             .addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()) {
@@ -146,7 +147,7 @@ class SplashScreenActivity : AppCompatActivity() {
             } else if(TextUtils.isDigitsOnly(edtLastName.text.toString())) {
                 Toast.makeText(this@SplashScreenActivity, "Please enter last name", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
-            } else if(TextUtils.isDigitsOnly(edt_phone_number.text.toString())){
+            } else if(TextUtils.isDigitsOnly(edtPhoneNumber.text.toString())){
                 Toast.makeText(this@SplashScreenActivity, "Please enter phone number", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             } else {
@@ -161,10 +162,12 @@ class SplashScreenActivity : AppCompatActivity() {
                     .addOnFailureListener { e ->
                         Toast.makeText(this@SplashScreenActivity, e.message, Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
+                        progress_bar.visibility = View.GONE
                     }
                     .addOnSuccessListener {
                         Toast.makeText(this@SplashScreenActivity, "Registered successfully", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
+                        progress_bar.visibility = View.GONE
                     }
 
             }
